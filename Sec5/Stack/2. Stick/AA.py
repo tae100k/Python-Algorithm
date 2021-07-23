@@ -1,14 +1,24 @@
 import sys
 sys.stdin = open("input.txt", "r")
+stick = input()
+cnt = 0
+temp =[]
 
-n = int(input())
-ath = [list(map(int, input().split())) for _ in range(n)]
-res = []
-
-for a in ath:
-    if any(t[0] > a[0] and t[1] > a[1] for t in ath):
-        continue
+for i,s in enumerate(stick):
+    #'('나오면 무조건 추가
+    if s == '(':
+        temp.append(s)
+        
     else:
-        res.append(a)
+        #절단인 경우
+        if stick[i-1] == '(':
+            temp.pop()
+            cnt += len(temp)
 
-print(len(res))
+        #길이가 짧아 아웃    
+        else:
+            temp.pop()
+            cnt +=1
+            
+        
+print(cnt)
