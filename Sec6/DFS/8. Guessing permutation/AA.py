@@ -1,27 +1,31 @@
-#꼭 다시 풀어보기
-# 특히 파스칼 삼각형 부분 스스로 쓸 수 있도록 하기!
+#개선사항:
+#elif v == n:
+#        if tot == f:
+#로 하지말고 그냥 if v == n and tot == f로 처리할 
 
 import sys
-sys.stdin = open("input.txt", "r")
+#sys.stdin = open("input.txt","r")
 
-def DFS(v, tot):
-    if v == n and tot == f:
-        for x in res:
-            print(x, end = '')
-        sys.exit(1)
+def DFS(tot, v):
+    if tot > f:
+        return
+    elif v == n:
+        if tot == f:
+            for r in res:
+                print(r, end = ' ')
+            sys.exit(0)
     else:
-        for k in range(1, n+1):
-            if ch[k] == 0:
-                ch[k]= 1
-                res[v] = k
-                DFS(v+1, tot+(bi[v] * res[v]))
-                ch[k]= 0
+        for i in range(n):
+            if ch[i] == 0:
+                ch[i] = 1
+                res[v] = i+1
+                DFS(tot + (i+1) * fr[v], v+1)
+                ch[i] = 0
 
 n, f = map(int, input().split())
+fr = [1] * n
+ch = [0] * n
 res = [0] * n
-ch = [0] * (n+1)
-bi = [1] * n
-for i in range(1, n):
-    bi[i] = bi[i-1] * (n-i) / i
-    
-DFS(0, 0) 
+for k in range(1, n):
+    fr[k] = fr[k-1] * (n-k)//k
+DFS(0, 0)
