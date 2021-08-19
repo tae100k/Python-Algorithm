@@ -1,12 +1,11 @@
 from collections import deque
 import sys
-#sys.stdin = open("input.txt", "r")
-
+sys.stdin = open("input.txt", "r")
 
 m = int(input())
 dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
-board = [(list(map(int, input().split()))) for _ in range(m)]
+board = [list(map(int, input().split())) for _ in range(m)]
 ch = [[0] * m for _ in range(m)]
 dq = deque()
 tot = board[m//2][m//2]
